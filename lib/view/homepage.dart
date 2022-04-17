@@ -5,10 +5,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task/global/themes.dart';
 import 'package:task/widget/Bigtext.dart';
 
 import '../controllers/product.dart';
-import '../widget/product_tile.dart';
+import '../widget/product_widget.dart';
 
 class HomePage extends StatelessWidget {
   final ProductController productController = Get.put(ProductController());
@@ -16,7 +17,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: BigText(text: 'Get data from api using Getx'),
+      ),
       body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 15.0, top: 45),
@@ -63,13 +69,26 @@ class HomePage extends StatelessWidget {
                             decoration: InputDecoration(
                                 fillColor: Color(0xffF4F5F7),
                                 border: InputBorder.none,
-                                hintText: 'Search for items'),
+                                hintText: 'Search now'),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: 10,
+                ),
+                Container(
+                    height: 47,
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                        color: primarycolor,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Icon(
+                      Icons.filter_alt_rounded,
+                      color: Colors.white,
+                    )),
               ],
             ),
           ),
@@ -82,27 +101,37 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: Obx(() {
-              if (productController.isLoading.value)
-                return Center(child: CircularProgressIndicator());
-              else
-                return SizedBox(
-                  height: 500,
-                  child: GridView.builder(
-                    // ignore: prefer_const_constructors
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 2 / 4,
-                      crossAxisCount: 3,
+
+          // Show data from api  **********************
+
+          Obx(() {
+            if (productController.isLoading.value)
+              return Center(child: CircularProgressIndicator());
+            else
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: GridView.count(
+                          reverse: true,
+                          physics: BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 6.0,
+                          childAspectRatio: 2 / 2.7,
+                          mainAxisSpacing: 8.0,
+                          children: List.generate(
+                              productController.productList.length, (index) {
+                            return ProductTile(
+                                productController.productList[index]);
+                          })),
                     ),
-                    itemCount: productController.productList.length,
-                    itemBuilder: (context, index) {
-                      return ProductTile(productController.productList[index]);
-                    },
-                  ),
-                );
-            }),
-          )
+                  ],
+                ),
+              );
+          })
         ],
       ),
     );

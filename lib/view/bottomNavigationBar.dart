@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import '../global/themes.dart';
 import 'homepage.dart';
 
 class NavBar extends StatefulWidget {
@@ -43,7 +44,7 @@ class _NavBarState extends State<NavBar> {
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(
-                AssetImage("assets/icons/Message.png"),
+                AssetImage("assets/icons/explore.png"),
               ),
               label: 'Explore',
             ),
@@ -57,13 +58,15 @@ class _NavBarState extends State<NavBar> {
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(
-                AssetImage("assets/icons/explore.png"),
+                AssetImage("assets/icons/Message.png"),
+             
               ),
               label: 'Inbox',
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(
-                AssetImage("assets/icons/Bag.png"),
+                AssetImage("assets/icons/Bag.png",),
+             
               ),
               label: 'Shop',
             ),
@@ -72,8 +75,8 @@ class _NavBarState extends State<NavBar> {
           unselectedFontSize: 12,
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
-          unselectedItemColor: Color.fromARGB(255, 104, 103, 103),
-          selectedItemColor: Color(0xffF15223),
+          unselectedItemColor: Color.fromARGB(255, 0, 0, 0),
+          selectedItemColor:primarycolor,
           onTap: _onItemTapped,
           elevation: 5),
     );
