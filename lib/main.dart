@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'bottomNavigationBar.dart';
-import 'home.dart';
+import 'view/bottomNavigationBar.dart';
+
 
 void main() {
   runApp(const MyApp());

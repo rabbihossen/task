@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-
-import 'home.dart';
+import 'homepage.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
-    Home(),
+    HomePage(),
     Center(child: Icon(Icons.abc_outlined)),
     Center(child: Icon(Icons.done_all)),
     Center(child: Icon(Icons.abc_outlined)),
@@ -37,7 +36,8 @@ class _NavBarState extends State<NavBar> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: ImageIcon(
-                AssetImage("assets/icons/Home.png"),
+                AssetImage("assets/icons/Home.png",),
+                
               ),
               label: 'Home',
             ),
@@ -57,7 +57,7 @@ class _NavBarState extends State<NavBar> {
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(
-                AssetImage("assets/icons/Message.png"),
+                AssetImage("assets/icons/explore.png"),
               ),
               label: 'Inbox',
             ),
